@@ -1,0 +1,123 @@
+/*//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+                    Login y Registro
+//////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////*/
+.h4Header{
+	width: 15%;
+	color: white;
+}
+
+/*//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+                    Login y Registro
+//////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////*/
+.loginRegistro{
+    background-image: url("../imagenes/fondoLoginRegistro.jpg");
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+}
+
+.divLogin,.divRegistro{
+    margin-left: 10%;
+    background-color: white;
+    
+    border: 2px solid;
+    border-radius: 10%;
+    padding: 2%;
+}
+
+
+/* Div Login */
+
+.divLogin{
+    width: 30%;
+    height: 50%;
+}
+
+/* Div Registro */
+.divRegistro{
+    width: 45%;
+    height: 80%;
+}
+
+.divRegistro>form{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.registroBotones{
+    grid-column: 1 / 3;
+}
+
+/*//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+                        Catalogo 
+//////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////*/
+.bodyCatalogo{
+    background-color: black;
+    background: linear-gradient(to bottom, #041d49, rgb(0, 0, 0));
+}
+
+.mainCatalogo{
+    background-image: url("../imagenes/fondoCatalogo.PNG");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.encabezadoCatalogo{
+    font-size: 5em;
+    text-align: center;
+}
+
+.divProducto{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/*//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+                        Detalle Item 
+//////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////*/
+.bodyDetalles{
+    background-color: rgba(0, 0, 0, 0.904);
+    color: white
+}
+
+.h1Detalles{
+   text-align: center;
+   font-size: 5em;
+}
+
+.divDetalleItem{
+    width: 70%;
+    margin-top: 2%;
+    margin-left: 5%;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr, 2fr);
+}
+
+.divDetalleItem>img{
+    grid-column: 1;
+}
+
+.divDetalleItem>div{
+    grid-column: 2;
+    padding-top: 20%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
