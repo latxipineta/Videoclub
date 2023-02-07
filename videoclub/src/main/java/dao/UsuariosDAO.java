@@ -45,7 +45,7 @@ public class UsuariosDAO {
 		return usu;
 	}
 	
-	public boolean buscaUsuario(String correo) {
+	public static boolean buscaUsuario(String correo) {
 		boolean existe = false;
 		
 		String sql = "SELECT * FROM usuario WHERE correo = '"+correo+"'";
@@ -67,7 +67,7 @@ public class UsuariosDAO {
 		return existe;
 	}
 	
-	public Usuario devuelveUsuario(String correo) {
+	static public Usuario devuelveUsuario(String correo) {
 		Usuario usu = null;
 		
 		String sql = "SELECT * FROM usuario WHERE correo = '"+correo+"'";
@@ -196,6 +196,22 @@ public class UsuariosDAO {
 								  + "telefono = '"+usu.getAdmin()+"' ,"
 								  + "admin = "+usu.getAdmin()+" "
 								  + "WHERE correo = '"+usu.getEmail()+"'"; 
+        try {
+        	Connection con = BDConex.getDataSource().getConnection();
+            Statement st = con.createStatement();
+            
+            st.executeUpdate(sql);
+            
+            st.close();
+            con.close();
+        } catch (SQLException ex) {
+            System.err.println("Error en metodo actualizarUsuario: " + ex);
+        }
+	}
+	
+	static public void actualizaContrasenia(String nuevaContrasenia, String correo) {
+		String sql = "UPDATE usuario SET password = '"+nuevaContrasenia+"'"
+								  + "WHERE correo = '"+correo+"'"; 
         try {
         	Connection con = BDConex.getDataSource().getConnection();
             Statement st = con.createStatement();

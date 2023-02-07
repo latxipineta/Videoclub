@@ -23,7 +23,7 @@
                 <nav class="navbar navbar-expand-lg bg-dark py-3 fs-5">
                     <div class="container-fluid">
 
-                      <a class="navbar-brand text-white mx-3" href="#">Inicio</a>
+                      <a class="navbar-brand text-white mx-3" href="productos.jsp">Inicio</a>
 
                       <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
@@ -38,6 +38,9 @@
 		    			  </c:if>
                           <li class="nav-item">
                             <a class="nav-link mx-3 text-white" href="carro.jsp">Carro</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link mx-3 text-white" href="listadoCompras.jsp">Listado compras</a>
                           </li>
                           <li class="nav-item">
                             <a class="nav-link mx-3 text-white" href="ServletLogin?borrar=si">Cerrar Sesion</a>

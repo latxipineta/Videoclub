@@ -44,6 +44,9 @@
                             <a class="nav-link mx-3 text-white" href="carro.jsp">Carro</a>
                           </li>
                           <li class="nav-item">
+                            <a class="nav-link mx-3 text-white" href="listadoCompras.jsp">Listado compras</a>
+                          </li>
+                          <li class="nav-item">
                             <a class="nav-link mx-3 text-white" href="ServletLogin?borrar=si">Cerrar Sesion</a>
                           </li>
                         </ul>

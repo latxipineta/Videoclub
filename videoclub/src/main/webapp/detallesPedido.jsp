@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Lista Proveedores</title>
+	<title>Lista Usuarios</title>
 	<!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
@@ -15,15 +15,7 @@
 		           <jsp:forward page="login.jsp"/>
 		    </c:if>
 		    
-		    <c:if test="${listaProveedores == null}">
-		           <jsp:forward page="ServletProveedores"/>
-		    </c:if>
-		    
-		    <c:if test="${user.getAdmin() == 0}">
-		           <jsp:forward page="productos.jsp"/>
-		   </c:if>
-		    
-             <header>
+            <header>
                 <nav class="navbar navbar-expand-lg bg-dark py-3 fs-5">
                     <div class="container-fluid">
 
@@ -63,12 +55,26 @@
                   </nav>
             </header>
 
-            <main class="w-100 p-5 row text-white">  
-					<c:forEach items="${listaProveedores}" var="proveedor">
-							<a 	class="nav-link m-3 p-5 col-3 bg-secondary text-white text-center" 
-								href="ServletProveedores?detalles=${proveedor.getNomEmpresa()}">${proveedor.getNomEmpresa()}
-							</a>
-		        	</c:forEach>
+            <main class="w-100 p-5 text-white">  
+            
+					<table class="w-75 row">
+						<tr>
+								<th>Producto</th>
+								<th>Nombre</th>
+								<th>Cantidad</th>
+								<th>Precio Total</th>
+						</tr>
+						<c:forEach items="${listaLineasPedido}" var="lineaPedido">
+								<tr>
+									<td class="p-5"><img src="${lineaPedido.getImagenProducto()}" width="25%"></td>
+									<td class="p-5">${lineaPedido.getNombreProducto()}</td>
+									<td class="p-5">${lineaPedido.getCantidad()}</td>
+									<td class="p-5">${lineaPedido.getPrecioTotal()}€</td>
+								</tr>
+			        	</c:forEach>
+			        	
+					</table>
+				
             </main>
         
   </body>

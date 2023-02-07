@@ -1,10 +1,49 @@
 package beans;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CarroCompra {
 	private static HashMap<Integer, LineaPedido> carro = new HashMap<Integer, LineaPedido>();
+	
+	public static void aniadeLinea(LineaPedido linea) {
+		if(carro != null && carro.containsKey(linea.getIdProducto())) {
+			for (Integer clave : carro.keySet()) {
+				LineaPedido valor = carro.get(clave);
+				//si el producto ya existe
+			    if(valor.getIdProducto() == linea.getIdProducto()) {
+			    	//le sumo 1 a la cantidad y sumo el precio total
+			    	valor.setCantidad(valor.getCantidad()+1);
+			    	valor.setPrecioTotal(valor.getPrecioTotal()+linea.getPrecioTotal());
+			    	//lo añado al carro
+			    	carro.put(clave, valor);
+			    }
+			}
+		}else {
+			//Si no existia ese producto en el carro lo añado
+			carro.put(linea.getIdProducto(), linea);
+		}
+		System.out.println("El carro : ");
+		for (Integer clave : carro.keySet()) {
+			LineaPedido valor = carro.get(clave);
+			System.out.println(clave+" -> "+valor);
+		}
+	}
+	
+	public static float devuelvePrecioTotal() {
+		float precioTotal = 0;
+		
+		for (Integer clave : carro.keySet()) {
+			LineaPedido valor = carro.get(clave);
+			precioTotal = precioTotal + valor.getPrecioTotal();
+		}
+		
+		return precioTotal;
+	}
+	
+	
+	public static void vaciarCarro() {
+		carro.clear();
+	}
 	
 	
 	public static HashMap<Integer, LineaPedido> getCarro() {
@@ -13,53 +52,5 @@ public class CarroCompra {
 
 	public static void setCarro(HashMap<Integer, LineaPedido> carro) {
 		CarroCompra.carro = carro;
-	}
-	
-	
-
-	/*public void aniadeLinea(LineaPedido linea) {
-		if(carro != null && carro.containsKey(linea.getItem().getId())) {
-			for (Integer clave : carro.keySet()) {
-				LineaPedido valor = carro.get(clave);
-			    if(valor.getPedido().getId() == linea.getPedido().getId()) {
-			    	valor.setCantidad(valor.getCantidad()+1);
-			    	carro.put(clave, valor);
-			    }
-			}
-		}else {
-			carro.put(linea.getPedido().getId(), linea);
-		}
-	}*/
-	
-	public void borraLinea(int idItem) {
-		
-	}
-	
-	public LineaPedido getLineaPedido(int iditem) {
-		LineaPedido l = new LineaPedido();
-		
-		return l;
-	}
-	
-	public ArrayList<LineaPedido> getLineasPedido(){
-		ArrayList<LineaPedido> arrl = new ArrayList<LineaPedido>();
-		
-		return arrl;
-	}
-	
-	public double total() {
-		double total = 0;
-		
-		return total;
-	}
-	
-	public void removeAll() {
-		
-	}
-	
-	public boolean vacio() {
-		boolean vacio = true;
-		
-		return vacio;
 	}
 }

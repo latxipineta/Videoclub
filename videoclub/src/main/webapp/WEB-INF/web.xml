@@ -40,6 +40,38 @@
 	         <param-value>proveedores.txt</param-value>
      	</init-param>
   </servlet>
+  
+        	  <servlet>
+  		<servlet-name>ServletCarro</servlet-name>
+  		<servlet-class>servlets.ServletCarro</servlet-class>
+  </servlet>
+  
+  
+          	  <servlet>
+  		<servlet-name>ServletCompras</servlet-name>
+  		<servlet-class>servlets.ServletCompras</servlet-class>
+  </servlet>
+  
+            	  <servlet>
+  		<servlet-name>ServletPago</servlet-name>
+  		<servlet-class>servlets.ServletPago</servlet-class>
+  </servlet>
+  
+    	   <servlet-mapping>
+  		<servlet-name>ServletPago</servlet-name>
+  		<url-pattern>/ServletPago</url-pattern>
+  </servlet-mapping>
+  
+    	   <servlet-mapping>
+  		<servlet-name>ServletCompras</servlet-name>
+  		<url-pattern>/ServletCompras</url-pattern>
+  </servlet-mapping>
+  
+  
+    	   <servlet-mapping>
+  		<servlet-name>ServletCarro</servlet-name>
+  		<url-pattern>/ServletCarro</url-pattern>
+  </servlet-mapping>
   	
   	   <servlet-mapping>
   		<servlet-name>ServletRegistro</servlet-name>

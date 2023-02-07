@@ -14,7 +14,11 @@ public class Producto {
 		this.tipo = tipo;
 		this.numUnidades = numUnidades;
 		this.nomGenero = nomGenero;
-		this.precioVentas = precioVentas;
+		if(descuento == 50) {
+			this.precioVentas = precioVentas/2;
+		}else {
+			this.precioVentas = precioVentas;
+		}
 		this.idProducto = idProducto;
 		this.descuento = descuento;
 	}

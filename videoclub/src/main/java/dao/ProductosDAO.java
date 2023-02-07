@@ -78,7 +78,7 @@ public class ProductosDAO {
 		return arrlProductos;
 	}
 	
-	public Producto getProducto(int id) {
+	static public Producto getProducto(int id) {
 		Producto p = null;
 		
         String sql = "SELECT * FROM producto where idProducto = "+id;

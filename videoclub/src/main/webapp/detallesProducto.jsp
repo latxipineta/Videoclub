@@ -23,7 +23,7 @@
                 <nav class="navbar navbar-expand-lg bg-dark py-3 fs-5">
                     <div class="container-fluid">
 
-                      <a class="navbar-brand text-white mx-5" href="productos.jsp">Inicio</a>
+                      <a class="navbar-brand text-white mx-3" href="productos.jsp">Inicio</a>
 
                       <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
@@ -37,10 +37,13 @@
 		                        </li>
 		    			  </c:if>
                           <li class="nav-item">
-                            <a class="nav-link mx-4 text-white" href="#">Carro</a>
+                            <a class="nav-link mx-3 text-white" href="carro.jsp">Carro</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link mx-4 text-white" href="ServletLogin?borrar=si">Cerrar Sesion</a>
+                            <a class="nav-link mx-3 text-white" href="listadoCompras.jsp">Listado compras</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link mx-3 text-white" href="ServletLogin?borrar=si">Cerrar Sesion</a>
                           </li>
                         </ul>
 
@@ -81,7 +84,7 @@
                                 </table>
                                 <br>
                                 <c:if test="${producto.getNumUnidades() > 0}">
-							           <a href="ServletProductos?compra=${producto.getIdProducto()}" class="text-dark w-25 p-1 bg-light border rounded-2 text-center" style="text-decoration: none;">COMPRAR</a>
+							           <a href="ServletCarro?compra=${producto.getIdProducto()}" class="text-dark w-25 p-1 bg-light border rounded-2 text-center" style="text-decoration: none;">COMPRAR</a>
 							    </c:if>
 							    <c:if test="${producto.getNumUnidades() == 0}">
 							    		<p class="text-danger fs-2 fw-bold">Sin Stock</p>

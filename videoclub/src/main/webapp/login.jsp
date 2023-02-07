@@ -29,16 +29,23 @@
 
             <form action="ServletLogin" method="post">
 
-                Usuario: <input type="text" name="user" required><br><br>
-                Contraseña: <input type="password" name="password" required><br><br> 
-                
-                <hr>
-                <input type="submit" name="login" value="Login">
-                <input type="submit" name="reset" value="Reset">
-                <br><br>
-
-                <a href="registro.jsp" class="text-dark">No tienes una cuenta??   Registrate</a>
-
+                 <c:if test="${olvide == null}">
+		                 Usuario: <input type="text" name="user" required><br><br>
+		                Contraseña: <input type="password" name="password" required><br><br>
+               			 <hr>
+	            		<input type="submit" name="login" value="Login">
+               			<input type="submit" name="reset" value="Reset">
+               			
+               			<br><br>
+               			
+               			<a href="registro.jsp" class="text-dark">No tienes una cuenta??   Registrate</a><br>
+						<a href="ServletLogin?olvide=si" class="text-dark">Has olvidado la contraseña??</a>
+	        	 </c:if>
+	        	 
+	        	<c:if test="${olvide != null}">
+	        		Introduce tu correo: <input type="text" name="correo" required><br><br>
+	            			<input type="submit" name="enviarCorreo" value="Enviar Correo">
+	        	</c:if>
             </form>
 
         </div>
