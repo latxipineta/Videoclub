@@ -22,11 +22,6 @@ public class CarroCompra {
 			//Si no existia ese producto en el carro lo añado
 			carro.put(linea.getIdProducto(), linea);
 		}
-		System.out.println("El carro : ");
-		for (Integer clave : carro.keySet()) {
-			LineaPedido valor = carro.get(clave);
-			System.out.println(clave+" -> "+valor);
-		}
 	}
 	
 	public static float devuelvePrecioTotal() {

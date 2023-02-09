@@ -38,8 +38,8 @@
                			
                			<br><br>
                			
-               			<a href="registro.jsp" class="text-dark">No tienes una cuenta??   Registrate</a><br>
-						<a href="ServletLogin?olvide=si" class="text-dark">Has olvidado la contraseña??</a>
+               			<a href="registro.jsp" class="text-dark fw-bold text-decoration-none">¿No tienes una cuenta? Regístrate</a><br>
+						<a href="ServletLogin?olvide=si" class="text-dark fw-bold text-decoration-none">¿Has olvidado la contraseña?</a>
 	        	 </c:if>
 	        	 
 	        	<c:if test="${olvide != null}">
@@ -47,8 +47,6 @@
 	            			<input type="submit" name="enviarCorreo" value="Enviar Correo">
 	        	</c:if>
             </form>
-
         </div>
-
   </body>
 </html>

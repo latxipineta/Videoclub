@@ -8,11 +8,10 @@ import java.util.ArrayList;
 
 import beans.Producto;
 import beans.Proveedor;
-import beans.Usuario;
 import conex.BDConex;
 
 public class ProductosDAO {
-	public ArrayList<Producto> listaTodosProductos() {
+	public static ArrayList<Producto> listaTodosProductos() {
 		ArrayList<Producto> arrlProductos = new ArrayList<Producto>();
 		
         String sql = "SELECT * FROM producto";
@@ -45,7 +44,7 @@ public class ProductosDAO {
 		return arrlProductos;
 	}
 	
-	public ArrayList<Producto> ProductosPorGenero(int id) {
+	public static ArrayList<Producto> ProductosPorGenero(int id) {
 		ArrayList<Producto> arrlProductos = new ArrayList<Producto>();
 		
         String sql = "SELECT * FROM producto WHERE idGenero = "+id;
@@ -78,7 +77,7 @@ public class ProductosDAO {
 		return arrlProductos;
 	}
 	
-	static public Producto getProducto(int id) {
+	public static Producto getProducto(int id) {
 		Producto p = null;
 		
         String sql = "SELECT * FROM producto where idProducto = "+id;
@@ -109,7 +108,7 @@ public class ProductosDAO {
 		return p;
 	}
 	
-	public void actualizarProveedor(Proveedor pro, String clave) {
+	public static void actualizarProveedor(Proveedor pro, String clave) {
 		String sql = "UPDATE producto SET proveedor = '"+pro.getNomEmpresa()+"' "
 								  + "WHERE proveedor = '"+clave+"'"; 
         try {

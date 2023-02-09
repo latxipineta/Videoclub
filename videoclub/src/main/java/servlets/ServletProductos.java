@@ -26,13 +26,12 @@ public class ServletProductos extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ProductosDAO p = new ProductosDAO();
-		
 		if(request.getParameter("id") != null) {
+			// cuando en "productos.jsp" le das a un producto, se recupera su id
 			int id = Integer.parseInt(request.getParameter("id"));
 			
 			//Sacar el producto por su id y sus valoraciones
-			Producto pro = p.getProducto(id);
+			Producto pro = ProductosDAO.getProducto(id);
 			ArrayList<String> arrlValo = ValoracionesDAO.ValoracionesProducto(id);
 			
 			request.setAttribute("producto", pro);
@@ -40,13 +39,13 @@ public class ServletProductos extends HttpServlet {
 			
 			request.getRequestDispatcher("detallesProducto.jsp").forward(request, response);
 		}else if(request.getParameter("idGenero") != null){
+			// cuando en el menu de "productos.jsp" eliges un genero
 			//Sacar todos los productos del genero especificado
 			int id = Integer.parseInt(request.getParameter("idGenero"));
-			ArrayList<Producto> arrlPro = p.ProductosPorGenero(id);
+			ArrayList<Producto> arrlPro = ProductosDAO.ProductosPorGenero(id);
 			
 			//Sacar todos los generos
-			GenerosDAO gDAO = new GenerosDAO();
-			ArrayList<Genero> arrlGeneros = gDAO.listaTodosGeneros();
+			ArrayList<Genero> arrlGeneros = GenerosDAO.listaTodosGeneros();
 			
 			request.setAttribute("arrlProductos", arrlPro);
 			request.setAttribute("arrlGeneros", arrlGeneros);
@@ -54,11 +53,10 @@ public class ServletProductos extends HttpServlet {
 			request.getRequestDispatcher("productos.jsp").forward(request, response);
 		}else {
 			//Sacar todos los productos
-			ArrayList<Producto> arrlPro = p.listaTodosProductos();
+			ArrayList<Producto> arrlPro = ProductosDAO.listaTodosProductos();
 			
 			//Sacar todos los generos
-			GenerosDAO gDAO = new GenerosDAO();
-			ArrayList<Genero> arrlGeneros = gDAO.listaTodosGeneros();
+			ArrayList<Genero> arrlGeneros = GenerosDAO.listaTodosGeneros();
 			
 			request.setAttribute("arrlProductos", arrlPro);
 			request.setAttribute("arrlGeneros", arrlGeneros);

@@ -14,7 +14,6 @@ import beans.CarroCompra;
 import beans.LineaPedido;
 import beans.Pedido;
 import beans.Usuario;
-import dao.PedidoDAO;
 import dao.ProductosDAO;
 
 /**
@@ -26,19 +25,20 @@ public class ServletCarro extends HttpServlet {
     public ServletCarro() {
         super();
     }
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession sess = request.getSession(false);
 		if(request.getParameter("compra") != null) {
-			ProductosDAO pDAO = new ProductosDAO();
-			
+			// cuando le das a comprar un producto en "detallesProducto.jsp", se crea una linea de pedido
 			int idProducto = Integer.parseInt(request.getParameter("compra"));
 			int idPedido = (int) sess.getAttribute("idPedido");
 			int cantidad = 1;
-			float precioTotal = pDAO.getProducto(idProducto).getPrecioVentas();
+			float precioTotal = ProductosDAO.getProducto(idProducto).getPrecioVentas();
 			
 			LineaPedido lp = new LineaPedido(idProducto, idPedido, cantidad, precioTotal);
 			
+			// se añade la linea de pedido al carro
 			CarroCompra.aniadeLinea(lp);
 			
 			sess.setAttribute("listaLineasPedido", CarroCompra.getCarro());
@@ -46,20 +46,19 @@ public class ServletCarro extends HttpServlet {
 			request.getRequestDispatcher("productos.jsp").forward(request, response);
 			
 		}else if(request.getParameter("vaciarCarro") != null) {
+			// cuando en "carro.jsp" le das a vaciar carro, se vacia
 			CarroCompra.vaciarCarro();
 			sess.setAttribute("listaLineasPedido", null);
+			
 			request.getRequestDispatcher("carro.jsp").forward(request, response);
 			
 		}else if(request.getParameter("pagar") != null) {
+			// cuando en "carro.jsp" le das a pagar, se crea el pedido
 			int idPedido = (int) sess.getAttribute("idPedido");
-			//Sacar precio total
 			float precio = CarroCompra.devuelvePrecioTotal();
-			//Sacar fecha actual
             String fecha = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-            //Sacar correo de usuario
             Usuario usu = (Usuario) sess.getAttribute("user");
             String correoUsuario = usu.getEmail();
-            //Sacar nombrePedido
             String nombrePedido = "Pedido";
 			if(!request.getParameter("nombrePedido").isEmpty()) {
 				nombrePedido = request.getParameter("nombrePedido");
@@ -67,6 +66,7 @@ public class ServletCarro extends HttpServlet {
 			
 			Pedido p = new Pedido(idPedido, precio, fecha, correoUsuario, nombrePedido);
 			
+			// guardamos el pedido en sesion
 			sess.setAttribute("pedido", p);
 			
 			response.sendRedirect("formaPago.jsp");

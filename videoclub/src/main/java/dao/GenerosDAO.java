@@ -7,11 +7,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import beans.Genero;
-import beans.Usuario;
 import conex.BDConex;
 
 public class GenerosDAO {
-	public ArrayList<Genero> listaTodosGeneros() {
+	public static ArrayList<Genero> listaTodosGeneros() {
 		ArrayList<Genero> arrlGeneros = new ArrayList<Genero>();
 		
         String sql = "SELECT * FROM genero";
@@ -36,7 +35,7 @@ public class GenerosDAO {
 		return arrlGeneros;
 	}
 	
-	static public String devuelveNombreGenero(int idGenero) {
+	public static String devuelveNombreGenero(int idGenero) {
 		String nomGenero = "";
 		
         String sql = "SELECT nombre FROM genero WHERE idGenero = "+idGenero;

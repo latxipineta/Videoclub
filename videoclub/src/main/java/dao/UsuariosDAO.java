@@ -12,7 +12,7 @@ import conex.BDConex;
 
 public class UsuariosDAO {
 	
-	public Usuario buscaUsuario(String nombre, String password) {
+	public static Usuario buscaUsuario(String nombre, String password) {
 		Usuario usu = null;
 		
 		String sql = "SELECT * FROM usuario WHERE password = '"+password+"' and nombre = '"+nombre+"'";
@@ -67,7 +67,7 @@ public class UsuariosDAO {
 		return existe;
 	}
 	
-	static public Usuario devuelveUsuario(String correo) {
+	public static Usuario devuelveUsuario(String correo) {
 		Usuario usu = null;
 		
 		String sql = "SELECT * FROM usuario WHERE correo = '"+correo+"'";
@@ -100,7 +100,7 @@ public class UsuariosDAO {
 		return usu;
 	}
 	
-	public void insertaUsuario(Usuario usu) {
+	public static void insertaUsuario(Usuario usu) {
 		
 		String sql = "INSERT INTO usuario(nombre, apellidos, direccion, codigoPostal, municipio, ciudad, pais, correo, password, telefono, admin) "
                 + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -129,7 +129,7 @@ public class UsuariosDAO {
         }
 	}
 	
-	public int cuantosUsuarios() {
+	public static int cuantosUsuarios() {
 		int num = 0;
 		
         String sql = "SELECT count(*) FROM usuario";
@@ -150,7 +150,7 @@ public class UsuariosDAO {
 		return num;
 	}
 	
-	public ArrayList<Usuario> listaTodosUsuarios() {
+	public static ArrayList<Usuario> listaTodosUsuarios() {
 		ArrayList<Usuario> arrlUsuarios = new ArrayList<Usuario>();
 		
         String sql = "SELECT * FROM usuario";
@@ -184,7 +184,7 @@ public class UsuariosDAO {
 		return arrlUsuarios;
 	}
 	
-	public void actualizarUsuario(Usuario usu) {
+	public static void actualizarUsuario(Usuario usu) {
 		String sql = "UPDATE usuario SET nombre = '"+usu.getNombre()+"' ,"
 								  + "apellidos = '"+usu.getApellidos()+"' ,"
 								  + "direccion = '"+usu.getDireccion()+"' ,"
@@ -209,7 +209,7 @@ public class UsuariosDAO {
         }
 	}
 	
-	static public void actualizaContrasenia(String nuevaContrasenia, String correo) {
+	public static void actualizaContrasenia(String nuevaContrasenia, String correo) {
 		String sql = "UPDATE usuario SET password = '"+nuevaContrasenia+"'"
 								  + "WHERE correo = '"+correo+"'"; 
         try {

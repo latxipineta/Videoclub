@@ -34,26 +34,28 @@ public class ServletProveedores extends HttpServlet {
 		String rutaFich = request.getRealPath("Proveedores/"+getInitParameter("nomFich"));
 		
 		if(request.getParameter("detalles") != null) {
+			// cuando en "listaProveedores.jsp" pulsas en un proveedor
 			//devuelve el proveedor del que mostraremos detalles
 			Proveedor p = Proveedor.dameProveedor(request.getParameter("detalles"), rutaFich);
 			request.setAttribute("proveedor", p);
 			
 			request.getRequestDispatcher("detallesProveedor.jsp").forward(request, response);
 		}else if(request.getParameter("proveedorCambiar") != null){
-			// actualizar el fichero y la base de datos
+			// cuando en "detallesProveedor.jsp" cambias campos
+			// recuperamos el proveedor que hemos intentado editar
 			Proveedor p = Proveedor.dameProveedor(request.getParameter("proveedorCambiar"), rutaFich);
 			
 			String nombreAntiguo = p.getNomEmpresa();
 			
 			String nomEmpresa = request.getParameter("nomEmpresa");
+				// validamos que no existe un nombre de empresa igual
 				   nomEmpresa = validarNombres(rutaFich, nomEmpresa, nombreAntiguo);
 			String nomResponsable = request.getParameter("nomResponsable");
 			String nomCategoria = request.getParameter("nomCategoria");
 			String telefono = request.getParameter("telefono");
 			String correo = request.getParameter("correo");
 			
-			System.out.println(nombreAntiguo+" y el nombre nuevo es : "+nomEmpresa);
-			
+			// comprobamos que los campos no estan vacios
 			if(!nomEmpresa.isEmpty()) {
 				p.setNomEmpresa(nomEmpresa);
 			}
@@ -70,11 +72,10 @@ public class ServletProveedores extends HttpServlet {
 				p.setCorreo(correo);
 			}
 			
-			// En base de datos
-			ProductosDAO pDAO = new ProductosDAO();
-			pDAO.actualizarProveedor(p, nombreAntiguo);
+			// se actualiza en base de datos, en caso de que no se haya intentado cambiar nada, seguira teniendo los mismos atributos
+			ProductosDAO.actualizarProveedor(p, nombreAntiguo);
 			
-			// En el fichero
+			// se actualiza en el fichero
 			Proveedor.actualizarFichero(nombreAntiguo, p, rutaFich);
 			
 			//mostrar todos los proveedores
@@ -83,7 +84,8 @@ public class ServletProveedores extends HttpServlet {
 			
 			request.getRequestDispatcher("listaProveedores.jsp").forward(request, response);
 		}else {
-			//mostrar todos los proveedores
+			// cuando se entra por primera vez a "listaProveedor.jsp"
+			// mostrar todos los proveedores
 			ArrayList<Proveedor> arrlProveedores = Proveedor.cargarProveedores(rutaFich);
 			request.setAttribute("listaProveedores", arrlProveedores);
 			

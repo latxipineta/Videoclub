@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.EnviarMail;
 import beans.Usuario;
 import dao.UsuariosDAO;
 
@@ -23,15 +24,17 @@ public class ServletUsuarios extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		UsuariosDAO uDAO = new UsuariosDAO();
-		
 		if(request.getParameter("detalles") != null) {
-			Usuario usu = uDAO.devuelveUsuario(request.getParameter("detalles"));
+			// cuando en "listaUsuarios.jsp" pulsas en un usuario, recogemos el usuario y vamos a sus detalles
+			Usuario usu = UsuariosDAO.devuelveUsuario(request.getParameter("detalles"));
 			request.setAttribute("usuario", usu);
 			
 			request.getRequestDispatcher("detallesUsuario.jsp").forward(request, response);
+			
 		}else if(request.getParameter("cambiar") != null) {
-			Usuario usu = uDAO.devuelveUsuario(request.getParameter("usuarioCambiar"));
+			// cuando en "detallesUsuario.jsp"
+			// se guarda el usuario que hemos intentado editar
+			Usuario usu = UsuariosDAO.devuelveUsuario(request.getParameter("usuarioCambiar"));
 			
 			String nombre = request.getParameter("nombre");
 			String apellidos = request.getParameter("apellidos");
@@ -43,6 +46,7 @@ public class ServletUsuarios extends HttpServlet {
 			String password = request.getParameter("password");
 			String telefono = request.getParameter("telefono");
 			
+			// si hay algun atributo distinto a los que ya tenia se cambia por el nuevo
 			if(!nombre.isEmpty()) {
 				usu.setNombre(nombre);
 			}
@@ -53,7 +57,21 @@ public class ServletUsuarios extends HttpServlet {
 				usu.setDireccion(direccion);
 			}
 			if(!codigo_postal.isEmpty()) {
-				usu.setCodigo_postal(Integer.parseInt(codigo_postal));
+				boolean valido = true;
+				
+				if(codigo_postal.length() == 5) {
+					for (int i = 0; i < codigo_postal.length(); i++) {
+						if(codigo_postal.charAt(i)<'0' || codigo_postal.charAt(i)>'9') {
+							valido = false;
+						}
+					}
+				}else {
+					valido = false;
+				}
+				
+				if(valido) {
+					usu.setCodigo_postal(Integer.parseInt(codigo_postal));
+				}
 			}
 			if(!municipio.isEmpty()) {
 				usu.setMunicipio(municipio);
@@ -66,6 +84,8 @@ public class ServletUsuarios extends HttpServlet {
 			}
 			if(!password.isEmpty()) {
 				usu.setPasssword(password);
+				// se le envia email con la nueva contraseña
+				EnviarMail.enviarNuevaContraseñaAdmin(usu.getNombre(), usu.getEmail(), password);
 			}
 			if(!telefono.isEmpty()) {
 				usu.setTelefono(telefono);
@@ -77,14 +97,18 @@ public class ServletUsuarios extends HttpServlet {
 				usu.setAdmin(0);
 			}
 			
-			uDAO.actualizarUsuario(usu);
+			// se actualisa en la bd
+			UsuariosDAO.actualizarUsuario(usu);
 			
-			ArrayList<Usuario> arrlUsuarios = uDAO.listaTodosUsuarios();
+			// hacemos un arraylist con todos los usuarios y volvemos a la lista de usuarios
+			ArrayList<Usuario> arrlUsuarios = UsuariosDAO.listaTodosUsuarios();
 			request.setAttribute("listaUsuarios", arrlUsuarios);
 			
 			request.getRequestDispatcher("listaUsuarios.jsp").forward(request, response);
 		}else {
-			ArrayList<Usuario> arrlUsuarios = uDAO.listaTodosUsuarios();
+			// cuando se entra por primera vez a "listaUsuarios.jsp"
+			// hacemos un arraylist con todos los usuarios y volvemos a la lista de usuarios
+			ArrayList<Usuario> arrlUsuarios = UsuariosDAO.listaTodosUsuarios();
 			request.setAttribute("listaUsuarios", arrlUsuarios);
 			
 			request.getRequestDispatcher("listaUsuarios.jsp").forward(request, response);

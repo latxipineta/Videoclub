@@ -19,45 +19,8 @@
 		           <jsp:forward page="ServletProductos"/>
 		    </c:if>
 		    
-            <header>
-                <nav class="navbar navbar-expand-lg bg-dark py-3 fs-5">
-                    <div class="container-fluid">
-
-                      <a class="navbar-brand text-white mx-3" href="productos.jsp">Inicio</a>
-
-                      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                        <ul class="navbar-nav me-auto">
-                          <c:if test="${user.getAdmin() == 1}">
-		           				<li class="nav-item">
-		                            <a class="nav-link mx-3 text-white" href="listaUsuarios.jsp">Lista Usuarios</a>
-		                        </li>
-		                        <li class="nav-item">
-		                            <a class="nav-link mx-3 text-white" href="listaProveedores.jsp">Lista Proveedores</a>
-		                        </li>
-		    			  </c:if>
-                          <li class="nav-item">
-                            <a class="nav-link mx-3 text-white" href="carro.jsp">Carro</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link mx-3 text-white" href="listadoCompras.jsp">Listado compras</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link mx-3 text-white" href="ServletLogin?borrar=si">Cerrar Sesion</a>
-                          </li>
-                        </ul>
-
-                      </div>
-
-                    </div>
-					<c:if test="${user.getAdmin() == 1}">
-						<h4 class="h4Header">${user.getNombre()}-admin</h4>
-					</c:if>
-                    <c:if test="${user.getAdmin() == 0}">
-						<h4 class="h4Header">${user.getNombre()}</h4>
-					</c:if>
-                  </nav>
-            </header>
+			<!--Header común para todas las páginas excepto login y registro--> 
+			<jsp:include page="cabecera.jsp"></jsp:include>
 
             <main class="mainCatalogo w-100 p-5">  
                   <!--Encabezado--> 
@@ -99,6 +62,5 @@
 		        		</c:forEach>
                     </div>
             </main>
-        
   </body>
 </html>

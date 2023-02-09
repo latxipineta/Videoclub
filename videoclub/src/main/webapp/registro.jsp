@@ -21,7 +21,7 @@
 	    </c:if>
 	    
             <h1 class="mb-5">
-            	Registrate
+            	Regístrate
 	            <c:if test="${error != null}">
 	            		<span style="color: red;">Error</span>
 	            		<span style="color: red;" class="fs-5">${error}</span>
@@ -49,13 +49,10 @@
                 <div class="col-12 registroBotones">
                   <hr>  
                   <input type="submit" name="registro" value="Registrarse">
-                  <input type="submit" name="reset" value="Reset">
-                  <a href="login.jsp" class="text-dark">Ya tienes una cuenta?? Logueate</a>
-                </div>
-                
+                  <input type="submit" name="reset" value="Reset"><br><br>
+                  <a href="login.jsp" class="text-dark fw-bold text-decoration-none">¿Ya tienes una cuenta? Accede!</a>
+                </div>        
             </form>
-
         </div>
-
  </body>
 </html>

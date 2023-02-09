@@ -6,11 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import beans.Genero;
 import conex.BDConex;
 
 public class ValoracionesDAO {
-	static public ArrayList<String> ValoracionesProducto(int id) {
+	public static  ArrayList<String> ValoracionesProducto(int id) {
 		ArrayList<String> arrlValoraciones = new ArrayList<String>();
 		
         String sql = "SELECT * FROM valoraciones WHERE idProducto = "+id;
